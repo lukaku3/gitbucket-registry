@@ -1,3 +1,4 @@
+# https://qiita.com/wwbQzhMkhhgEmhU/items/a391ea346cc70a9a383b
 version: '3'
 services:
   gitbucket:
@@ -9,3 +10,18 @@ services:
       - ./gitbucket/data:/gitbucket
     restart: always
     privileged: true
+  registry:
+    image: registry:latest
+    ports:
+      - 5000:5000
+    restart: always
+#    networks:
+#      - default
+  docker-registry-frontend:
+    image: konradkleine/docker-registry-frontend:v2
+    ports:
+      - 10080:80
+      - 10443:443
+    environment:
+      - ENV_DOCKER_REGISTRY_HOST=localhost
+      - ENV_DOCKER_REGISTRY_PORT=5000
