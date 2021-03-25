@@ -1,0 +1,11 @@
+version: '3'
+services:
+  gitbucket:
+    image: gitbucket/gitbucket
+    ports:
+      - 8080:8080
+      - 29418:29418
+    volumes:
+      - ./gitbucket/data:/gitbucket
+    restart: always
+    privileged: true
